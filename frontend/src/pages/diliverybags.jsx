@@ -32,9 +32,10 @@ export default function DeliveryBags() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      exit={{ opacity: 0 }} 
+      initial={{ opacity: 0, y: -60 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -60 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
       className="pt-20 flex-1 min-h-screen flex flex-col font-['Inter'] text-[#181816] bg-[#F9F7F4]"
     >
       {/* SECTION 1: Hero */}

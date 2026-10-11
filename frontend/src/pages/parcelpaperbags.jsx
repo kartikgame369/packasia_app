@@ -44,9 +44,10 @@ export default function ParcelPaperBags() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      exit={{ opacity: 0 }} 
+      initial={{ opacity: 0, y: -60 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -60 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
       className="pt-20 flex-1 min-h-screen flex flex-col font-body bg-[#F9F7F4] text-[#181816]"
     >
       <div className="max-w-[1200px] w-full mx-auto px-4 md:px-6 lg:px-8 py-8 flex flex-col gap-12 lg:gap-16">

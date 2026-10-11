@@ -40,21 +40,21 @@ const products = [
     title: "Paper Bags",
     desc: "Customizable retail and parcel bags made from recycled fibers.",
     image: "/complete_images/HOME-20260921T211140Z-1-001/HOME/for_left_side.png",
-    link: "/products/paper-bags",
+    link: "/parcel-paper-bags",
     objectPosition: "center 20%",
   },
   {
     title: "Corrugated Boxes",
     desc: "Heavy-duty single and double wall boxes for industrial transit.",
     image: "/complete_images/HOME-20260921T211140Z-1-001/HOME/for_right_sidr.png",
-    link: "/products/corrugated-boxes",
+    link: "/delivery-bags",
     objectPosition: "center 20%",
   },
 ];
 
 export default function Home() {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="pt-20">
+    <motion.div initial={{ opacity: 0, y: -60 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -60 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="pt-20">
 
       {/* -- HERO -- */}
       <section className="relative min-h-[100dvh] md:min-h-[80vh] flex items-center overflow-hidden" style={{ backgroundColor: "var(--color-surface)" }}>

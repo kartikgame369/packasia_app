@@ -42,7 +42,7 @@ function Layout() {
   const hideLayout = ['/login', '/admin'].includes(location.pathname);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       {!hideLayout && <Navbar />}
       <main className="flex-1">
         <AnimatedRoutes />
