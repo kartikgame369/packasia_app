@@ -1,5 +1,15 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
+
+// Rate limiter: 25 requests per 15 minutes per IP to prevent financial & quota exhaustion
+const chatLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 25,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many chat requests from this IP. Please wait before trying again.' },
+});
 
 const SYSTEM_PROMPT = `You are "Aria", the friendly and knowledgeable AI customer support assistant for Packasia — a leading industrial packaging manufacturer based in India.
 
@@ -45,29 +55,34 @@ YOUR INSTRUCTIONS:
 - NEVER make up pricing. Say "Our sales team will share a custom quote based on your requirements."
 - If you cannot answer, say "Let me connect you with our team at +91 98765 43210 or support@packasia.com"`;
 
-router.post('/', async (req, res) => {
+router.post('/', chatLimiter, async (req, res) => {
   try {
     const { messages } = req.body;
 
     if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: 'messages array is required' });
+      return res.status(400).json({ error: 'Messages array is required' });
+    }
+
+    // Security bounds: Prevent token exhaustion or memory DoS
+    if (messages.length > 20) {
+      return res.status(400).json({ error: 'Message history limit exceeded (max 20 messages)' });
     }
 
     const apiKey = process.env.AI_KEY;
     if (!apiKey) {
-      return res.status(500).json({ error: 'AI_KEY not configured on server' });
+      console.error('AI_KEY is not configured in server environment');
+      return res.status(503).json({ error: 'Chat assistant is temporarily unavailable' });
     }
 
-    // DEBUG: log first 15 chars of key so we can confirm it's loading
-    console.log('AI_KEY prefix:', apiKey.substring(0, 15));
-    console.log('AI_KEY length:', apiKey.length);
-
+    // Format and sanitize messages, limiting text length per message
     const messagesFormatted = [
       { role: 'system', content: SYSTEM_PROMPT },
-      ...messages.map((msg) => ({
-        role: msg.role === 'model' ? 'assistant' : 'user',
-        content: msg.text,
-      })),
+      ...messages
+        .filter((msg) => msg && typeof msg.text === 'string' && msg.text.trim())
+        .map((msg) => ({
+          role: msg.role === 'model' || msg.role === 'assistant' ? 'assistant' : 'user',
+          content: msg.text.trim().slice(0, 1000), // Bound character length
+        })),
     ];
 
     const response = await fetch('https://co.agentrouter.org/v1/chat/completions', {
@@ -85,21 +100,18 @@ router.post('/', async (req, res) => {
     });
 
     const data = await response.json();
-    // DEBUG: log full OpenRouter response
-    console.log('OpenRouter status:', response.status);
-    console.log('OpenRouter response:', JSON.stringify(data, null, 2));
 
     if (!response.ok || data.error) {
-      const errMsg = data.error?.message || data.error || `HTTP ${response.status}`;
-      return res.status(response.status).json({ error: errMsg });
+      console.error('Upstream AI response error status:', response.status);
+      return res.status(502).json({ error: 'Unable to process chat request at this time' });
     }
 
-    const botText = data.choices[0].message.content;
+    const botText = data.choices?.[0]?.message?.content || 'Thank you for contacting Packasia! How else can I help?';
     res.json({ reply: botText });
 
   } catch (error) {
-    console.error('Chat route error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Chat route error:', error.message);
+    res.status(500).json({ error: 'Internal server error while processing chat' });
   }
 });
 
