@@ -40,7 +40,7 @@ const products = [
     title: "Paper Bags",
     desc: "Customizable retail and parcel bags made from recycled fibers.",
     image: "/complete_images/HOME-20260921T211140Z-1-001/HOME/for_left_side.png",
-    link: "/parcel-paper-bags",
+    link: "/products/paper-bags",
     objectPosition: "center 20%",
   },
   {

@@ -27,6 +27,7 @@ function AnimatedRoutes() {
         <Route path="/manufacturing" element={<Manufacturing />} />
         <Route path="/parcel-paper-bags" element={<ParcelPaperBags />} />
         <Route path="/delivery-bags" element={<DeliveryBags />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/products/:type" element={<Products />} />
         <Route path="/quote" element={<Quote />} />
         <Route path="/insights" element={<Insights />} />

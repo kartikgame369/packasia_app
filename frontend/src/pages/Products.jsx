@@ -383,8 +383,8 @@ const PaperBags = () => {
 export default function Products() {
   const location = useLocation();
   
-  // Basic routing logic: if path includes paper, show paper bags, else default to corrugated
-  const isPaper = location.pathname.includes('paper');
+  // Basic routing logic: if path includes paper or is default /products, show paper bags, else default to corrugated
+  const isPaper = location.pathname.includes('paper') || location.pathname === '/products';
 
   return (
     <div className="min-h-screen">
