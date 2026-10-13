@@ -14,6 +14,7 @@ const PRODUCT_CATEGORIES = [
     shortName: 'Corrugated',
     subtitle: '3-Ply, 5-Ply, 7-Ply',
     icon: Package,
+    comingSoon: true,
   },
   {
     id: 'paper',
@@ -179,7 +180,7 @@ const SectionDivider = ({ label, tag, isRequired }) => (
 
 export default function Quote() {
   // Category state — defaults to 'corrugated' so 3-ply, 5-ply, 7-ply are immediately visible
-  const [product, setProduct] = useState('corrugated');
+  const [product, setProduct] = useState('paper');
   const [selectedPly, setSelectedPly] = useState('5ply');
   const [selectedBagSize, setSelectedBagSize] = useState('medium');
   const [selectedDeliverySize, setSelectedDeliverySize] = useState('del_m');
@@ -297,36 +298,46 @@ export default function Quote() {
                         {PRODUCT_CATEGORIES.map(cat => {
                           const isSelected = product === cat.id;
                           const IconComp = cat.icon;
+                          const isComingSoon = cat.comingSoon;
                           return (
                             <button
                               key={cat.id}
                               type="button"
-                              onClick={() => setProduct(cat.id)}
-                              className={`p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-center sm:text-left transition-all duration-200 flex flex-col items-center sm:items-start justify-between min-h-[92px] sm:min-h-[110px] cursor-pointer active:scale-95 ${
-                                isSelected
-                                  ? 'border-[#0D4A2F] bg-[#F3F8F5] shadow-sm ring-1 ring-[#0D4A2F]'
-                                  : 'border-gray-200 hover:border-gray-300 bg-white'
+                              onClick={() => { if (!isComingSoon) setProduct(cat.id); }}
+                              disabled={isComingSoon}
+                              className={`relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-center sm:text-left transition-all duration-200 flex flex-col items-center sm:items-start justify-between min-h-[92px] sm:min-h-[110px] ${
+                                isComingSoon
+                                  ? 'border-gray-200 bg-gray-50 opacity-60 cursor-not-allowed'
+                                  : isSelected
+                                    ? 'border-[#0D4A2F] bg-[#F3F8F5] shadow-sm ring-1 ring-[#0D4A2F] cursor-pointer active:scale-95'
+                                    : 'border-gray-200 hover:border-gray-300 bg-white cursor-pointer active:scale-95'
                               }`}
                             >
+                              {/* Coming Soon Badge */}
+                              {isComingSoon && (
+                                <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-amber-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[8px] sm:text-[9px] font-bold uppercase tracking-wider shadow-sm z-10 whitespace-nowrap">
+                                  Coming Soon
+                                </span>
+                              )}
                               <div className="w-full flex items-center justify-between mb-1.5">
                                 <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto sm:mx-0 ${
-                                  isSelected ? 'bg-[#0D4A2F] text-white' : 'bg-gray-100 text-gray-600'
+                                  isComingSoon ? 'bg-gray-200 text-gray-400' : isSelected ? 'bg-[#0D4A2F] text-white' : 'bg-gray-100 text-gray-600'
                                 }`}>
                                   <IconComp size={14} className="sm:w-4 sm:h-4" />
                                 </div>
-                                {isSelected && (
+                                {isSelected && !isComingSoon && (
                                   <span className="hidden sm:flex w-4 h-4 rounded-full bg-[#0D4A2F] text-white items-center justify-center">
                                     <Check size={10} />
                                   </span>
                                 )}
                               </div>
                               <div className="w-full">
-                                <p className={`font-bold text-xs sm:text-sm leading-tight ${isSelected ? 'text-[#0D4A2F]' : 'text-gray-900'}`} style={{ fontFamily: 'var(--font-heading)' }}>
+                                <p className={`font-bold text-xs sm:text-sm leading-tight ${isComingSoon ? 'text-gray-400' : isSelected ? 'text-[#0D4A2F]' : 'text-gray-900'}`} style={{ fontFamily: 'var(--font-heading)' }}>
                                   <span className="sm:hidden">{cat.shortName}</span>
                                   <span className="hidden sm:inline">{cat.name}</span>
                                 </p>
-                                <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 leading-tight line-clamp-1">
-                                  {cat.subtitle}
+                                <p className={`text-[10px] sm:text-[11px] mt-0.5 leading-tight line-clamp-1 ${isComingSoon ? 'text-gray-300' : 'text-gray-500'}`}>
+                                  {isComingSoon ? 'Coming Soon' : cat.subtitle}
                                 </p>
                               </div>
                             </button>

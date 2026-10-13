@@ -19,7 +19,7 @@ const sizes = [
     metric:'36 x 18 x 42 cm', imperial:'14.2" x 7.1" x 16.5"',
     bestFor:'Catering trays, party platters, dual-meal combos, and premium event deliveries.',
     features:['Block-bottom gusset','Double-ply kraft lining','Heavy-duty handles'] },
-  { id:'xl', label:'Extra Large (XL)', tag:'4L/APPROX', img:'/new_page_img/screen9.png',
+  { id:'xl', label:'Extra Large (XL)', tag:'4L/APPROX', img:'/new_page_img/screen8.png',
     badge:'Bulk Catering',
     metric:'44 x 22 x 50 cm', imperial:'17.3" x 8.7" x 19.7"',
     bestFor:'Bulk catering, convention meals, large hampers, and institutional delivery runs.',

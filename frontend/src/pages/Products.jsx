@@ -336,7 +336,7 @@ const PaperBags = () => {
                 </li>
               </ul>
               
-              <Link to="/parcel-paper-bags" className="flex items-center gap-2 text-sm font-semibold text-gray-900 group">
+              <Link to="/delivery-bags" className="flex items-center gap-2 text-sm font-semibold text-gray-900 group">
                 View Details <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             </motion.div>
@@ -369,7 +369,7 @@ const PaperBags = () => {
                 </li>
               </ul>
               
-              <Link to="/delivery-bags" className="flex items-center gap-2 text-sm font-semibold text-gray-900 group">
+              <Link to="/parcel-paper-bags" className="flex items-center gap-2 text-sm font-semibold text-gray-900 group">
                 View Details <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </Link>
             </motion.div>

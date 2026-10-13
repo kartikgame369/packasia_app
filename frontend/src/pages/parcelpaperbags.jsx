@@ -26,7 +26,7 @@ const sizes = [
     bestFor: 'Winter apparel, shoeboxes, multiple shopping units, and department store fashion merchandise.' 
   },
   { 
-    id: 'xl', label: 'XL / Jumbo', volume: '32.2 L', badge: 'Heavy Duty', img: '/new_page_img/screen5.png',
+    id: 'xl', label: 'XL / Jumbo', volume: '32.2 L', badge: 'Heavy Duty', img: '/new_page_img/scren4.png',
     metric: '42 x 16 x 48 cm', imperial: '16.5" x 6.5" x 19"',
     bestFor: 'Gourmet gift hampers, bulky winter parkas, corporate convention kits & heavy retail goods.' 
   },
@@ -305,28 +305,24 @@ export default function ParcelPaperBags() {
               </div>
               <h3 className="text-xl font-bold text-[#181816] mb-3 font-heading">Ecological Credentials</h3>
               <p className="text-[#686862] mb-6 flex-1 text-sm">
-                Verified by SGS and globally recognized environmental bodies ensuring compostability and circularity.
+                Engineered to naturally re-enter circular paper waste streams without synthetic coatings.
               </p>
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="bg-white/60 p-3 rounded-xl border border-white/60 flex items-center gap-2 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#0A2617] shrink-0" />
-                  <span className="text-[11px] font-bold text-[#0A2617]">FSC-C133275</span>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[#0A2617] shrink-0" />
+                  <span className="text-sm font-medium text-[#181816]">100% Curbside Recyclable</span>
                 </div>
-                <div className="bg-white/60 p-3 rounded-xl border border-white/60 flex items-center gap-2 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#0A2617] shrink-0" />
-                  <span className="text-[11px] font-bold text-[#0A2617]">REACH</span>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[#0A2617] shrink-0" />
+                  <span className="text-sm font-medium text-[#181816]">Water-Based Non-Toxic Inks (Zero VOC)</span>
                 </div>
-                <div className="bg-white/60 p-3 rounded-xl border border-white/60 flex items-center gap-2 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#0A2617] shrink-0" />
-                  <span className="text-[11px] font-bold text-[#0A2617]">100% Recyclable</span>
-                </div>
-                <div className="bg-white/60 p-3 rounded-xl border border-white/60 flex items-center gap-2 shadow-sm">
-                  <CheckCircle2 className="w-4 h-4 text-[#0A2617] shrink-0" />
-                  <span className="text-[10px] font-bold text-[#0A2617] leading-tight">Zero Single-Use Plastic</span>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[#0A2617] shrink-0" />
+                  <span className="text-sm font-medium text-[#181816]">Biodegradable Cornstarch Adhesives</span>
                 </div>
               </div>
-              <div className="bg-[#E7F6ED] text-[#0A2617] text-[10px] font-bold px-3 py-2 rounded-lg w-max border border-[#BCE3C5] uppercase tracking-widest mt-auto shadow-sm">
-                Green Guard Gold Certified
+              <div className="bg-white/60 text-[#4A4A46] text-[11px] font-bold px-4 py-2.5 rounded-lg w-full border border-gray-200/50 tracking-wide mt-auto">
+                EN 13432 Compostability Standard
               </div>
             </div>
           </div>

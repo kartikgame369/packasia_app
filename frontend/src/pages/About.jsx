@@ -1,6 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Leaf, Cpu, Handshake } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Leaf, Cpu, Handshake, Play } from "lucide-react";
 import ImageZoom from "../components/ImageZoom";
 
 export default function About() {
@@ -76,6 +76,68 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* -- VIDEO SHOWCASE -- */}
+      <section className="py-20 md:py-28" style={{ backgroundColor: "var(--color-background)" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="chip mb-4 inline-flex uppercase">See Us in Action</span>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}>
+              Where innovation meets production.
+            </h2>
+            <p className="mt-4 text-base" style={{ color: "var(--color-text-muted)" }}>
+              Watch how we turn recycled fibers into world-class industrial packaging.
+            </p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-3xl overflow-hidden shadow-2xl"
+            style={{ aspectRatio: "16 / 9" }}
+          >
+            {/* Video */}
+            <video
+              className="w-full h-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            >
+              <source src="/complete_images/about_video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Bottom gradient overlay */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+              style={{
+                background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+              }}
+            />
+
+            {/* Floating caption */}
+            <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "var(--color-forest-deep)" }}>
+                  <Play size={16} className="text-white ml-0.5" fill="white" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-sm md:text-base" style={{ fontFamily: "var(--font-heading)" }}>
+                    Our Manufacturing Process
+                  </p>
+                  <p className="text-white/70 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
+                    PACKASIA • BEHIND THE SCENES
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
