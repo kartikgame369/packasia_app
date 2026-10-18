@@ -22,7 +22,13 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration supporting dynamic allowed origins from environment
-const defaultOrigins = ['http://localhost:5173'];
+// defaultOrigins includes both dev and production server — override via ALLOWED_ORIGINS env var
+const defaultOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://15.135.217.225',
+  'http://15.135.217.225:80',
+];
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
   : defaultOrigins;
@@ -34,6 +40,7 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+      console.warn(`CORS blocked origin: ${origin}`);
       return callback(new Error('Not allowed by CORS policy'));
     },
     credentials: true,
