@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Bot, Minimize2, Phone, MapPin } from "lucide-react";
+import { API_BASE_URL } from "../constants";
 
 // ─── Company Knowledge Base ────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are "Aria", the friendly and knowledgeable AI customer support assistant for Packasia — a leading industrial packaging manufacturer based in India.
@@ -128,9 +129,7 @@ export default function ChatBot() {
     setShowQuickReplies(false);
 
     try {
-      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-
-      const response = await fetch(`${apiBase}/chat`, {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
