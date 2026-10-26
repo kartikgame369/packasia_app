@@ -26,8 +26,8 @@ app.use(helmet());
 const defaultOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  'http://15.135.217.225',
-  'http://15.135.217.225:80',
+  'http://13.54.173.49',
+  'http://13.54.173.49:80',
 ];
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
