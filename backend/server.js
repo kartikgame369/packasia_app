@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const { connectDB, getStatus } = require('./config/db');
+const mongoSanitize = require('@exortek/express-mongo-sanitize');
 
 // Verify critical environment variables
 if (!process.env.JWT_SECRET) {
