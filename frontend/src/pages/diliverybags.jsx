@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Leaf, Shield, Droplets, Package, Download, CheckCircle2, ArrowRight, Lock, Layers, BadgeCheck, Scan } from 'lucide-react';
 
@@ -28,6 +28,7 @@ const sizes = [
 
 export default function DeliveryBags() {
   const [selectedSize, setSelectedSize] = useState('medium');
+  const navigate = useNavigate();
   const selectedConfig = sizes.find(s => s.id === selectedSize) || sizes[1];
 
   return (
@@ -125,7 +126,7 @@ export default function DeliveryBags() {
                     ? 'ring-2 ring-[#0D4A2F] shadow-xl scale-[1.02] z-10' 
                     : 'border border-gray-200 shadow-sm hover:shadow-md hover:border-[#1A6B3C]'
                 }`}
-                onClick={() => setSelectedSize(size.id)}
+                onClick={() => navigate(`/quote?product=delivery&size=${size.id}`)}
               >
                 {size.featured && (
                   <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-[#0D4A2F] text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide shadow-md whitespace-nowrap">
@@ -158,15 +159,12 @@ export default function DeliveryBags() {
                       </li>
                     ))}
                   </ul>
-                  <button 
-                    className={`w-full py-2 rounded-xl text-sm font-semibold transition-colors mt-auto ${
-                      isSelected
-                        ? 'bg-[#0D4A2F] text-white'
-                        : 'bg-white text-[#181816] border border-gray-300 hover:bg-gray-50'
-                    }`}
-                  >
-                    {isSelected ? 'Selected' : 'Select Size'}
-                  </button>
+                  <button
+                      onClick={(e) => { e.stopPropagation(); navigate(`/quote?product=delivery&size=${size.id}`); }}
+                      className="w-full py-2 rounded-xl text-sm font-semibold transition-colors mt-auto bg-[#0D4A2F] text-white hover:bg-[#1A6B3C]"
+                    >
+                      Get a Quote ?
+                    </button>
                 </div>
               </motion.div>
             )})}

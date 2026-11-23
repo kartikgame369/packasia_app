@@ -47,7 +47,7 @@ const products = [
     title: "Corrugated Boxes",
     desc: "Heavy-duty single and double wall boxes for industrial transit.",
     image: "/complete_images/HOME-20260921T211140Z-1-001/HOME/for_right_sidr.png",
-    link: "/delivery-bags",
+    link: "/products/corrugated-boxes",
     objectPosition: "center 20%",
   },
 ];

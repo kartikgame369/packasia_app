@@ -6,7 +6,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const productLinks = [
   { label: 'Parcel Paper Bags', to: '/products/paper-bags', desc: 'Durable mailing solutions' },
-  { label: 'Paper Bags', to: '/products/parcel-paper-bags', desc: 'Sustainable retail solutions' },
+  { label: 'Paper Bags', to: '/parcel-paper-bags', desc: 'Sustainable retail solutions' },
   { label: 'Corrugated Boxes', to: '/products/corrugated-boxes', desc: 'Heavy-duty logistics packaging' },
 ];
 

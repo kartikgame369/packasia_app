@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, Phone, MapPin, ArrowRight, ShieldCheck, ChevronDown, 
@@ -184,6 +185,19 @@ export default function Quote() {
   const [selectedPly, setSelectedPly] = useState('5ply');
   const [selectedBagSize, setSelectedBagSize] = useState('medium');
   const [selectedDeliverySize, setSelectedDeliverySize] = useState('del_m');
+
+  // Read URL params to pre-select product & size from "Select Size" buttons
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const productParam = searchParams.get('product');
+    const sizeParam = searchParams.get('size');
+    if (productParam) setProduct(productParam);
+    if (sizeParam) {
+      if (productParam === 'paper') setSelectedBagSize(sizeParam);
+      else if (productParam === 'delivery') setSelectedDeliverySize(sizeParam);
+      else if (productParam === 'corrugated') setSelectedPly(sizeParam);
+    }
+  }, [searchParams]);
 
   // Form input states
   const [fullName, setFullName] = useState('');

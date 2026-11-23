@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Leaf, Layers, Ruler, Download, ChevronRight, CheckCircle2, ArrowRight, Package, Star, Lock, BadgeCheck, Scan } from 'lucide-react';
 
@@ -34,6 +34,7 @@ const sizes = [
 
 export default function ParcelPaperBags() {
   const [selectedSize, setSelectedSize] = useState('medium');
+  const navigate = useNavigate();
   
   const currentSizeData = sizes.find(s => s.id === selectedSize) || sizes[2];
 
@@ -132,7 +133,7 @@ export default function ParcelPaperBags() {
               return (
                 <div 
                   key={size.id}
-                  onClick={() => setSelectedSize(size.id)}
+                  onClick={() => navigate(`/quote?product=paper&size=${size.id}`)}
                   className={`relative flex flex-col bg-white rounded-2xl ${isSelected ? 'ring-2 ring-[#0D4A2F] shadow-xl scale-[1.02] z-10' : 'border border-gray-200 hover:border-[#1A6B3C]'} overflow-hidden cursor-pointer transition-all duration-300`}
                 >
                   {isSelected && (
@@ -173,8 +174,11 @@ export default function ParcelPaperBags() {
                       <p className="text-xs text-[#181816] leading-relaxed line-clamp-3">{size.bestFor}</p>
                     </div>
                     
-                    <button className={`w-full py-2.5 rounded-full text-sm font-semibold transition-colors mt-2 ${isSelected ? 'bg-[#0D4A2F] text-white' : 'border-2 border-gray-200 text-[#181816] hover:border-[#0D4A2F] hover:text-[#0D4A2F]'}`}>
-                      {isSelected ? 'Selected' : 'Select Size ->'}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate(`/quote?product=paper&size=${size.id}`); }}
+                      className="w-full py-2.5 rounded-full text-sm font-semibold transition-colors mt-2 bg-[#0D4A2F] text-white hover:bg-[#1A6B3C]"
+                    >
+                      Get a Quote ?
                     </button>
                   </div>
                 </div>

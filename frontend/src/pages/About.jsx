@@ -128,12 +128,12 @@ export default function About() {
                   <Play size={16} className="text-white ml-0.5" fill="white" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm md:text-base" style={{ fontFamily: "var(--font-heading)" }}>
+                  {/* <p className="text-white font-bold text-sm md:text-base" style={{ fontFamily: "var(--font-heading)" }}>
                     Our Manufacturing Process
-                  </p>
-                  <p className="text-white/70 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
+                  </p> */}
+                  {/* <p className="text-white/70 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
                     PACKASIA • BEHIND THE SCENES
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
